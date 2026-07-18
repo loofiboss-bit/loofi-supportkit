@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Loofi SupportKit
+Comment=Create a privacy-reviewed local diagnostics report
+Exec=/usr/libexec/loofi-supportkit/loofi-supportkit-desktop
+Icon=dev.loofi.supportkit
+Terminal=false
+Type=Application
+Categories=System;
+Keywords=diagnostics;support;privacy;report;
+StartupNotify=true

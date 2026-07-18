@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>dev.loofi.supportkit</id>
+  <name>Loofi SupportKit</name>
+  <summary>Local-first diagnostics with privacy-reviewed support cases</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+  <description>
+    <p>
+      Loofi SupportKit collects bounded, read-only system evidence and turns it
+      into a support case that can be reviewed before it is shared.
+    </p>
+    <p>
+      Diagnostics, deterministic rules, privacy redaction, case storage, and
+      exports run locally. The application does not repair the system or upload
+      evidence.
+    </p>
+  </description>
+  <launchable type="desktop-id">dev.loofi.supportkit.desktop</launchable>
+  <url type="homepage">https://github.com/loofiboss-bit/loofi-supportkit</url>
+  <url type="bugtracker">https://github.com/loofiboss-bit/loofi-supportkit/issues</url>
+  <provides>
+    <binary>loofi-supportkit-desktop</binary>
+  </provides>
+  <releases>
+    <release version="0.1.0" date="2026-07-18" />
+  </releases>
+  <content_rating type="oars-1.1" />
+</component>

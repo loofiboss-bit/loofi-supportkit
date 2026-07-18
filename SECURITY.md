@@ -2,7 +2,12 @@
 
 ## Supported versions
 
-The project is pre-1.0. Only the latest commit on the default branch receives security fixes.
+The project is pre-1.0. Security fixes are provided for the latest 0.1 patch release and the default branch.
+
+| Version | Supported |
+| ------- | --------- |
+| 0.1.x   | Yes       |
+| < 0.1   | No        |
 
 ## Reporting a vulnerability
 

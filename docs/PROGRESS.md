@@ -14,6 +14,7 @@ First usable vertical slice — implemented and locally validated.
 - Implemented deterministic rules, adversarial structured redaction, bounded collectors, static reports, checksummed ZIPs, and atomic redacted-case persistence.
 - Implemented the Tauri 2 + React diagnostic, findings, privacy, export, history, and settings workflow.
 - Added Linux/Windows CI, Dependabot, RPM/AppImage/NSIS packaging jobs, and user/developer/format/rule documentation.
+- Added tagged GitHub Release publication, Fedora COPR packaging, release checksums, illustrated end-user guides, and Wiki source pages.
 
 ## Validation performed
 

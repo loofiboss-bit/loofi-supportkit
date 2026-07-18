@@ -12,6 +12,15 @@ NO_STRIP=1 npm run tauri --workspace @loofi/supportkit-desktop -- build --bundle
 
 `NO_STRIP=1` avoids the older `strip` binary embedded in linuxdeploy, which cannot read Fedora 44 libraries containing ELF RELR sections. Rust release binaries are still optimized; the bundled system libraries are left intact.
 
+The public COPR package is defined by `packaging/fedora/loofi-supportkit.spec`. COPR builds the locked Cargo and npm dependency graphs from the tagged GitHub source. The project intentionally enables network access during builds because the first release does not vendor those dependency graphs.
+
+Submit a tagged release to COPR with:
+
+```bash
+copr-cli build loofi-supportkit packaging/fedora/loofi-supportkit.spec \
+  -r fedora-44-x86_64
+```
+
 ## Windows 11 x64
 
 The supported installer is NSIS. The release executable beside the bundle output is the portable build and does not require installation:

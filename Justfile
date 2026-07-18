@@ -20,7 +20,7 @@ typecheck:
     cargo check --workspace --all-targets
     npm run typecheck
 
-check: lint typecheck test validate-schemas
+check: lint typecheck test validate-schemas release-check
     npm run format:check
 
 build:
@@ -30,9 +30,11 @@ build:
 validate-schemas:
     npm run validate-schemas
 
+release-check:
+    npm run validate:release
+
 generate-fixtures:
     cargo test -p supportkit-core fixture_general_scan_is_deterministic
 
 package:
     npm run tauri build --workspace @loofi/supportkit-desktop
-
