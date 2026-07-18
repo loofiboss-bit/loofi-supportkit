@@ -4,7 +4,9 @@
   "version": "0.1.0",
   "description": "Local-first desktop diagnostics and privacy-reviewed support cases",
   "license": "MIT",
-  "workspaces": ["apps/desktop"],
+  "workspaces": [
+    "apps/desktop"
+  ],
   "scripts": {
     "dev": "npm run dev --workspace @loofi/supportkit-desktop",
     "build": "npm run build --workspace @loofi/supportkit-desktop",
@@ -26,4 +28,3 @@
     "node": ">=22.12"
   }
 }
-

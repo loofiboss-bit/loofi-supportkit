@@ -1,0 +1,4 @@
+[[permission]]
+identifier = "diagnostics"
+description = "Allows the main window to invoke the fixed SupportKit diagnostic workflow."
+commands.allow = ["run_scan", "list_cases", "load_case", "delete_case", "export_case", "get_storage_info"]

@@ -1,0 +1,28 @@
+[package]
+name = "loofi-supportkit-desktop"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[lib]
+name = "loofi_supportkit_desktop"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+chrono.workspace = true
+collector-runtime = { path = "../../../crates/collector-runtime" }
+redaction-engine = { path = "../../../crates/redaction-engine" }
+report-builder = { path = "../../../crates/report-builder" }
+serde.workspace = true
+serde_json.workspace = true
+supportkit-core = { path = "../../../crates/supportkit-core" }
+tauri = { version = "2", features = [] }
+uuid.workspace = true
+
+[dev-dependencies]
+tempfile.workspace = true
+

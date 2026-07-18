@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Loofi SupportKit">
+  <rect width="512" height="512" rx="112" fill="#10233f"/>
+  <path d="M142 112v238h228v-62H210V112z" fill="#e8eef8"/>
+  <circle cx="350" cy="162" r="56" fill="#4d8fe8"/>
+  <path d="M326 162l17 17 33-39" fill="none" stroke="#fff" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

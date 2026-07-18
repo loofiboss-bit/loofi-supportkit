@@ -3,13 +3,15 @@ dist/
 target/
 apps/desktop/dist/
 apps/desktop/src-tauri/target/
+apps/desktop/src-tauri/gen/schemas/
 playwright-report/
 test-results/
 coverage/
+.playwright-cli/
+output/
 *.log
 .env
 .env.*
 !.env.example
 .DS_Store
 Thumbs.db
-

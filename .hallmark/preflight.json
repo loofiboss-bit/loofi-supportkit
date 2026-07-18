@@ -1,0 +1,8 @@
+{
+  "date": "2026-07-18",
+  "framework": "React 19 with Vite 8 inside Tauri 2",
+  "fontStack": "new project; bundled fonts selected by Hallmark",
+  "palette": "new project; Cobalt OKLCH tokens selected by Hallmark",
+  "motion": "motion-cut; no animation library",
+  "spacing": "new 4px token scale"
+}
