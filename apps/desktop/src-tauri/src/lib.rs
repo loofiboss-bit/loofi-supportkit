@@ -155,7 +155,7 @@ fn list_cases(app: AppHandle) -> CommandResult<Vec<CaseSummary>> {
             highest_severity: case.findings.first().map(|finding| finding.severity),
         });
     }
-    summaries.sort_by(|left, right| right.created_at.cmp(&left.created_at));
+    summaries.sort_by_key(|summary| std::cmp::Reverse(summary.created_at));
     Ok(summaries)
 }
 
