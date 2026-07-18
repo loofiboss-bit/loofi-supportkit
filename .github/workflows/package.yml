@@ -22,7 +22,7 @@ jobs:
         env:
           NO_STRIP: "1"
         run: npm run tauri --workspace @loofi/supportkit-desktop -- build --bundles rpm,appimage
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: loofi-supportkit-fedora-x64
           path: |
@@ -43,7 +43,7 @@ jobs:
       - run: npm ci
       - name: Build NSIS installer
         run: npm run tauri --workspace @loofi/supportkit-desktop -- build --bundles nsis
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: loofi-supportkit-windows-x64
           path: |
