@@ -1,0 +1,16 @@
+{
+  "id": "common.storage.root-critical",
+  "version": 1,
+  "platforms": ["windows_11_x64", "fedora_kde_44_x64"],
+  "categories": ["storage", "performance", "general"],
+  "title": "System disk is critically full",
+  "severity": "critical",
+  "confidence": "confirmed_problem",
+  "explanation": "The system disk has crossed the critical usage threshold.",
+  "collectorId": "common.disk-usage",
+  "condition": { "path": "usedPercent", "operator": "greater_or_equal", "value": 90 },
+  "likelyImpact": "Updates, applications, and the desktop session may fail or become slow.",
+  "recommendedNextSteps": ["Review large personal files and application caches.", "Keep at least 15 percent free space before retrying updates."],
+  "documentationLinks": ["https://docs.fedoraproject.org/en-US/quick-docs/disk-usage/"]
+}
+

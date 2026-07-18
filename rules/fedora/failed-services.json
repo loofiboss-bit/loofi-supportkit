@@ -1,0 +1,16 @@
+{
+  "id": "fedora.services.failed-units",
+  "version": 1,
+  "platforms": ["fedora_kde_44_x64"],
+  "categories": ["services", "performance", "general"],
+  "title": "System services have failed",
+  "severity": "warning",
+  "confidence": "strong_indicator",
+  "explanation": "One or more systemd units are currently in a failed state.",
+  "collectorId": "fedora.failed-units",
+  "condition": { "path": "failedCount", "operator": "greater_than", "value": 0 },
+  "likelyImpact": "Features provided by the failed services may be unavailable or unreliable.",
+  "recommendedNextSteps": ["Review the bounded journal evidence for each failed unit.", "Share this case with an administrator before changing service state."],
+  "documentationLinks": ["https://www.freedesktop.org/software/systemd/man/latest/systemctl.html"]
+}
+

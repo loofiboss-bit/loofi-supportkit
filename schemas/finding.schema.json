@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://loofi.dev/supportkit/schemas/finding.schema.json",
+  "title": "SupportKit finding",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["ruleId", "title", "severity", "confidence", "platform", "category", "explanation", "evidenceRefs", "likelyImpact", "recommendedNextSteps", "documentationLinks", "ruleVersion"],
+  "properties": {
+    "ruleId": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{2,127}$" },
+    "title": { "type": "string", "minLength": 1 },
+    "severity": { "enum": ["critical", "warning", "notice", "info"] },
+    "confidence": { "enum": ["confirmed_problem", "strong_indicator", "possible_cause", "informational_observation"] },
+    "platform": { "enum": ["windows_11_x64", "fedora_kde_44_x64"] },
+    "category": { "enum": ["performance", "network", "updates", "storage", "drivers_graphics", "services", "general"] },
+    "explanation": { "type": "string", "minLength": 1 },
+    "evidenceRefs": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "likelyImpact": { "type": "string", "minLength": 1 },
+    "recommendedNextSteps": { "type": "array", "items": { "type": "string", "minLength": 1 }, "minItems": 1 },
+    "documentationLinks": { "type": "array", "items": { "type": "string", "format": "uri", "pattern": "^https://" } },
+    "ruleVersion": { "type": "integer", "minimum": 1 }
+  }
+}
+

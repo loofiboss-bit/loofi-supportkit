@@ -1,0 +1,29 @@
+{
+  "name": "loofi-supportkit",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Local-first desktop diagnostics and privacy-reviewed support cases",
+  "license": "MIT",
+  "workspaces": ["apps/desktop"],
+  "scripts": {
+    "dev": "npm run dev --workspace @loofi/supportkit-desktop",
+    "build": "npm run build --workspace @loofi/supportkit-desktop",
+    "lint": "npm run lint --workspace @loofi/supportkit-desktop",
+    "typecheck": "npm run typecheck --workspace @loofi/supportkit-desktop",
+    "test": "npm run test --workspace @loofi/supportkit-desktop",
+    "test:e2e": "npm run test:e2e --workspace @loofi/supportkit-desktop",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "validate-schemas": "node scripts/validate-schemas.mjs",
+    "validate": "npm run lint && npm run typecheck && npm run test && npm run validate-schemas && npm run format:check"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "prettier": "^3.8.1"
+  },
+  "engines": {
+    "node": ">=22.12"
+  }
+}
+

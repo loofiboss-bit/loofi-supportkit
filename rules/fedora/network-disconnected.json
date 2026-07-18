@@ -1,0 +1,16 @@
+{
+  "id": "fedora.network.disconnected",
+  "version": 1,
+  "platforms": ["fedora_kde_44_x64"],
+  "categories": ["network", "general"],
+  "title": "No active network connection detected",
+  "severity": "warning",
+  "confidence": "strong_indicator",
+  "explanation": "NetworkManager did not report an active connected interface.",
+  "collectorId": "fedora.network-state",
+  "condition": { "path": "connected", "operator": "equals", "value": false },
+  "likelyImpact": "Internet and local network services may be unavailable.",
+  "recommendedNextSteps": ["Check the network icon and reconnect the intended adapter.", "Verify the router or access point from another device."],
+  "documentationLinks": ["https://networkmanager.dev/docs/api/latest/nmcli.html"]
+}
+

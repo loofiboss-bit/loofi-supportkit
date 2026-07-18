@@ -1,0 +1,16 @@
+{
+  "id": "windows.services.stopped-automatic",
+  "version": 1,
+  "platforms": ["windows_11_x64"],
+  "categories": ["services", "performance", "general"],
+  "title": "Automatic Windows services are stopped",
+  "severity": "warning",
+  "confidence": "possible_cause",
+  "explanation": "One or more services configured for automatic startup are not running.",
+  "collectorId": "windows.service-state",
+  "condition": { "path": "stoppedAutomaticCount", "operator": "greater_than", "value": 0 },
+  "likelyImpact": "Features associated with the stopped services may be unavailable.",
+  "recommendedNextSteps": ["Review the named services and their recent event evidence.", "Ask an administrator to confirm whether each service is intentionally stopped."],
+  "documentationLinks": ["https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sc-query"]
+}
+
