@@ -18,7 +18,13 @@ pub fn build_html(case: &SupportCase) -> String {
         .collection_manifest
         .iter()
         .filter(|record| !matches!(record.status, supportkit_core::CollectorState::Complete))
-        .map(|record| format!("<li><code>{}</code>: {:?}</li>", escape(&record.collector_id), record.status))
+        .map(|record| {
+            format!(
+                "<li><code>{}</code>: {:?}</li>",
+                escape(&record.collector_id),
+                record.status
+            )
+        })
         .collect::<Vec<_>>()
         .join("\n");
     format!(
@@ -39,11 +45,19 @@ body{{font:16px/1.55 system-ui,sans-serif;color:#19231f;background:#f4f7f5;margi
         category = case.category,
         scan_status = case.scan_status,
         finding_count = case.findings.len(),
-        findings_empty = if case.findings.is_empty() { "<p>No diagnostic findings.</p>" } else { "" },
+        findings_empty = if case.findings.is_empty() {
+            "<p>No diagnostic findings.</p>"
+        } else {
+            ""
+        },
         findings = findings,
         app_version = escape(&case.app_version),
         schema_version = escape(&case.schema_version),
-        incomplete_empty = if incomplete.is_empty() { "<li>None</li>" } else { "" },
+        incomplete_empty = if incomplete.is_empty() {
+            "<li>None</li>"
+        } else {
+            ""
+        },
         incomplete = incomplete,
         redaction_count = case.redaction_manifest.categories.values().sum::<u64>(),
     )
@@ -98,13 +112,25 @@ pub fn payload_files(case: &SupportCase) -> Result<BTreeMap<String, Vec<u8>>> {
     files.insert("summary.html".into(), build_html(case).into_bytes());
     files.insert("findings.json".into(), pretty(&case.findings)?);
     files.insert("system-profile.json".into(), pretty(&case.system_profile)?);
-    files.insert("collection-manifest.json".into(), pretty(&case.collection_manifest)?);
-    files.insert("redaction-manifest.json".into(), pretty(&case.redaction_manifest)?);
+    files.insert(
+        "collection-manifest.json".into(),
+        pretty(&case.collection_manifest)?,
+    );
+    files.insert(
+        "redaction-manifest.json".into(),
+        pretty(&case.redaction_manifest)?,
+    );
     for evidence in &case.evidence {
         let safe_id: String = evidence
             .id
             .chars()
-            .map(|character| if character.is_ascii_alphanumeric() || ".-_".contains(character) { character } else { '_' })
+            .map(|character| {
+                if character.is_ascii_alphanumeric() || ".-_".contains(character) {
+                    character
+                } else {
+                    '_'
+                }
+            })
             .collect();
         files.insert(format!("evidence/{safe_id}.json"), pretty(evidence)?);
     }
@@ -171,9 +197,22 @@ mod tests {
             platform: Platform::FedoraKde44X64,
             category: ProblemCategory::General,
             scan_status: ScanStatus::Complete,
-            system_profile: SystemProfile { os_name: "Fedora Linux".into(), os_version: "44".into(), architecture: "x86_64".into(), desktop: Some("KDE Plasma".into()), hostname: None },
-            collection_manifest: vec![], findings: vec![], evidence: vec![],
-            redaction_manifest: RedactionManifest { version: 1, categories: BTreeMap::new(), transformed_paths: vec![], warnings: vec![] },
+            system_profile: SystemProfile {
+                os_name: "Fedora Linux".into(),
+                os_version: "44".into(),
+                architecture: "x86_64".into(),
+                desktop: Some("KDE Plasma".into()),
+                hostname: None,
+            },
+            collection_manifest: vec![],
+            findings: vec![],
+            evidence: vec![],
+            redaction_manifest: RedactionManifest {
+                version: 1,
+                categories: BTreeMap::new(),
+                transformed_paths: vec![],
+                warnings: vec![],
+            },
             export_history: vec![],
         }
     }
@@ -195,7 +234,14 @@ mod tests {
         assert_eq!(first, second);
         let archive = zip::ZipArchive::new(Cursor::new(first)).unwrap();
         let names: Vec<_> = archive.file_names().map(str::to_owned).collect();
-        for required in ["summary.html", "findings.json", "system-profile.json", "collection-manifest.json", "redaction-manifest.json", "checksums.sha256"] {
+        for required in [
+            "summary.html",
+            "findings.json",
+            "system-profile.json",
+            "collection-manifest.json",
+            "redaction-manifest.json",
+            "checksums.sha256",
+        ] {
             assert!(names.contains(&required.to_owned()));
         }
     }

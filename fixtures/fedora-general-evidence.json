@@ -4,7 +4,13 @@
     "collectorId": "fedora.system-profile",
     "kind": "system_profile",
     "collectedAt": "2026-07-18T10:00:00Z",
-    "data": { "osName": "Fedora Linux", "osVersion": "44", "architecture": "x86_64", "desktop": "KDE Plasma 6.4", "hostname": "fixture-workstation" }
+    "data": {
+      "osName": "Fedora Linux",
+      "osVersion": "44",
+      "architecture": "x86_64",
+      "desktop": "KDE Plasma 6.4",
+      "hostname": "fixture-workstation"
+    }
   },
   {
     "id": "evidence.storage.root",
@@ -18,14 +24,21 @@
     "collectorId": "fedora.failed-units",
     "kind": "failed_services",
     "collectedAt": "2026-07-18T10:00:00Z",
-    "data": { "failedCount": 2, "units": ["example-a.service", "example-b.service"] }
+    "data": {
+      "failedCount": 2,
+      "units": ["example-a.service", "example-b.service"]
+    }
   },
   {
     "id": "evidence.network.state",
     "collectorId": "fedora.network-state",
     "kind": "network_state",
     "collectedAt": "2026-07-18T10:00:00Z",
-    "data": { "connected": false, "dnsServers": ["192.0.2.53"], "ssid": "Fixture WiFi" }
+    "data": {
+      "connected": false,
+      "dnsServers": ["192.0.2.53"],
+      "ssid": "Fixture WiFi"
+    }
   },
   {
     "id": "evidence.updates.state",
@@ -35,4 +48,3 @@
     "data": { "pendingCount": 17, "rebootPending": false }
   }
 ]
-

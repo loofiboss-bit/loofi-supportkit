@@ -8,9 +8,17 @@
   "confidence": "informational_observation",
   "explanation": "The package manager reports pending updates.",
   "collectorId": "fedora.update-state",
-  "condition": { "path": "pendingCount", "operator": "greater_than", "value": 0 },
+  "condition": {
+    "path": "pendingCount",
+    "operator": "greater_than",
+    "value": 0
+  },
   "likelyImpact": "Available reliability or security fixes are not installed yet.",
-  "recommendedNextSteps": ["Review updates in Discover or with the system administrator.", "Save work before applying updates that may require a restart."],
-  "documentationLinks": ["https://docs.fedoraproject.org/en-US/quick-docs/dnf-system-upgrade/"]
+  "recommendedNextSteps": [
+    "Review updates in Discover or with the system administrator.",
+    "Save work before applying updates that may require a restart."
+  ],
+  "documentationLinks": [
+    "https://docs.fedoraproject.org/en-US/quick-docs/dnf-system-upgrade/"
+  ]
 }
-

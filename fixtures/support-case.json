@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "1.0.0",
+  "caseId": "018f3b9e-4ab3-7d23-8f8c-6e870742b6c2",
+  "createdAt": "2026-07-18T08:00:00Z",
+  "appVersion": "0.1.0",
+  "platform": "fedora_kde_44_x64",
+  "category": "general",
+  "scanStatus": "partial",
+  "systemProfile": {
+    "osName": "Fedora Linux",
+    "osVersion": "44",
+    "architecture": "x86_64",
+    "desktop": "KDE Plasma 6",
+    "hostname": "[REDACTED:hostname]"
+  },
+  "collectionManifest": [
+    {
+      "collectorId": "common.disk-usage",
+      "status": "complete",
+      "message": null,
+      "durationMs": 14,
+      "outputTruncated": false
+    },
+    {
+      "collectorId": "fedora.update-state",
+      "status": "skipped",
+      "message": "Synthetic fixture: collector unavailable.",
+      "durationMs": 0,
+      "outputTruncated": false
+    }
+  ],
+  "findings": [
+    {
+      "ruleId": "common.storage.root-critical",
+      "title": "System disk is critically full",
+      "severity": "critical",
+      "confidence": "confirmed_problem",
+      "platform": "fedora_kde_44_x64",
+      "category": "general",
+      "explanation": "The system disk has crossed the critical usage threshold.",
+      "evidenceRefs": ["evidence.storage.root"],
+      "likelyImpact": "Updates and applications may fail.",
+      "recommendedNextSteps": ["Review large personal files."],
+      "documentationLinks": [],
+      "ruleVersion": 1
+    }
+  ],
+  "evidence": [
+    {
+      "id": "evidence.storage.root",
+      "collectorId": "common.disk-usage",
+      "kind": "disk_usage",
+      "collectedAt": "2026-07-18T08:00:00Z",
+      "data": {
+        "mount": "/",
+        "usedPercent": 94,
+        "availableBytes": 8589934592
+      }
+    }
+  ],
+  "redactionManifest": {
+    "version": 1,
+    "categories": { "hostname": 1 },
+    "transformedPaths": ["$.systemProfile.hostname"],
+    "warnings": []
+  },
+  "exportHistory": []
+}

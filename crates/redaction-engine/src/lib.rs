@@ -7,20 +7,18 @@ use supportkit_core::RedactionManifest;
 static EMAIL: LazyLock<Regex> = LazyLock::new(|| {
     Regex::new(r"(?i)\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b").expect("valid email regex")
 });
-static IPV4: LazyLock<Regex> = LazyLock::new(|| {
-    Regex::new(r"\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b").expect("valid IPv4 regex")
-});
-static IPV6: LazyLock<Regex> = LazyLock::new(|| {
-    Regex::new(r"(?i)\b(?:[0-9a-f]{1,4}:){2,7}[0-9a-f]{0,4}\b").expect("valid IPv6 regex")
-});
+static IPV4: LazyLock<Regex> =
+    LazyLock::new(|| Regex::new(r"\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b").expect("valid IPv4 regex"));
+static IPV6: LazyLock<Regex> =
+    LazyLock::new(|| Regex::new(r"(?i)\b[0-9a-f:]{2,39}\b").expect("valid IPv6 regex"));
 static MAC: LazyLock<Regex> = LazyLock::new(|| {
     Regex::new(r"(?i)\b(?:[0-9a-f]{2}[:-]){5}[0-9a-f]{2}\b").expect("valid MAC regex")
 });
 static LINUX_HOME: LazyLock<Regex> = LazyLock::new(|| {
-    Regex::new(r"/(?:home|var/home)/[^/\s\"']+").expect("valid Linux home regex")
+    Regex::new(r#"/(?:home|var/home)/[^/\s"']+"#).expect("valid Linux home regex")
 });
 static WINDOWS_HOME: LazyLock<Regex> = LazyLock::new(|| {
-    Regex::new(r"(?i)\b[A-Z]:\\Users\\[^\\\s\"']+").expect("valid Windows home regex")
+    Regex::new(r#"(?i)\b[A-Z]:\\Users\\[^\\\s"']+"#).expect("valid Windows home regex")
 });
 static BEARER: LazyLock<Regex> = LazyLock::new(|| {
     Regex::new(r"(?i)\bbearer\s+[A-Za-z0-9._~+/-]{8,}=*").expect("valid bearer regex")
@@ -122,7 +120,10 @@ fn classify_sensitive_key(key: &str, options: RedactionOptions) -> Option<&'stat
     if normalized == "hostname" || normalized.ends_with("_hostname") {
         return Some("hostname");
     }
-    if matches!(normalized.as_str(), "username" | "user_name" | "account_name") {
+    if matches!(
+        normalized.as_str(),
+        "username" | "user_name" | "account_name"
+    ) {
         return Some("username");
     }
     if normalized == "ssid" && options.redact_ssids {
@@ -131,9 +132,18 @@ fn classify_sensitive_key(key: &str, options: RedactionOptions) -> Option<&'stat
     if normalized.contains("serial") || normalized == "machine_id" || normalized == "product_uuid" {
         return Some("machine_identifier");
     }
-    if ["token", "api_key", "apikey", "password", "passwd", "secret", "authorization", "cookie"]
-        .iter()
-        .any(|needle| normalized == *needle || normalized.ends_with(&format!("_{needle}")))
+    if [
+        "token",
+        "api_key",
+        "apikey",
+        "password",
+        "passwd",
+        "secret",
+        "authorization",
+        "cookie",
+    ]
+    .iter()
+    .any(|needle| normalized == *needle || normalized.ends_with(&format!("_{needle}")))
     {
         return Some("credential");
     }
@@ -147,7 +157,7 @@ fn redact_text(text: &mut String, path: &str, context: &mut Context) {
         matched.parse::<std::net::Ipv4Addr>().is_ok()
     });
     replace_regex(text, &IPV6, "ip_address", path, context, |matched| {
-        matched.parse::<std::net::Ipv6Addr>().is_ok()
+        matched.contains(':') && matched.parse::<std::net::Ipv6Addr>().is_ok()
     });
     replace_regex(text, &LINUX_HOME, "home_path", path, context, |_| true);
     replace_regex(text, &WINDOWS_HOME, "home_path", path, context, |_| true);
@@ -203,20 +213,35 @@ mod tests {
         let result = redact(&source, RedactionOptions::default());
         let serialized = serde_json::to_string(&result.value).unwrap();
         for forbidden in [
-            "alice-workstation", "alice@example.test", "192.168.1.24", "fe80::1",
-            "aa:bb:cc:dd:ee:ff", "/home/alice", "Users\\\\Alice", "abcdefghijklmnop",
-            "sk-secretsecretsecret", "SN-REAL-12345", "Alice Home",
+            "alice-workstation",
+            "alice@example.test",
+            "192.168.1.24",
+            "fe80::1",
+            "aa:bb:cc:dd:ee:ff",
+            "/home/alice",
+            "Users\\\\Alice",
+            "abcdefghijklmnop",
+            "sk-secretsecretsecret",
+            "SN-REAL-12345",
+            "Alice Home",
         ] {
             assert!(!serialized.contains(forbidden), "leaked {forbidden}");
         }
         assert!(result.manifest.categories["credential"] >= 2);
         assert!(!result.manifest.transformed_paths.is_empty());
-        assert!(!serde_json::to_string(&result.manifest).unwrap().contains("alice"));
+        assert!(
+            !serde_json::to_string(&result.manifest)
+                .unwrap()
+                .contains("alice")
+        );
     }
 
     #[test]
     fn invalid_ipv4_like_versions_are_not_redacted() {
-        let result = redact(&json!({"version": "999.999.999.999"}), RedactionOptions::default());
+        let result = redact(
+            &json!({"version": "999.999.999.999"}),
+            RedactionOptions::default(),
+        );
         assert_eq!(result.value["version"], "999.999.999.999");
     }
 
@@ -224,9 +249,10 @@ mod tests {
     fn ssid_redaction_can_be_disabled_explicitly() {
         let result = redact(
             &json!({"ssid": "Synthetic Network"}),
-            RedactionOptions { redact_ssids: false },
+            RedactionOptions {
+                redact_ssids: false,
+            },
         );
         assert_eq!(result.value["ssid"], "Synthetic Network");
     }
 }
-

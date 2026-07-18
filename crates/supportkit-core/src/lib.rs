@@ -9,9 +9,10 @@ use uuid::Uuid;
 pub const CASE_SCHEMA_VERSION: &str = "1.0.0";
 
 #[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Eq)]
-#[serde(rename_all = "snake_case")]
 pub enum Platform {
+    #[serde(rename = "windows_11_x64")]
     Windows11X64,
+    #[serde(rename = "fedora_kde_44_x64")]
     FedoraKde44X64,
 }
 
@@ -273,16 +274,23 @@ fn condition_matches(data: &Value, condition: &RuleCondition) -> bool {
         RuleOperator::Equals => current == Some(&condition.value),
         RuleOperator::NotEquals => current != Some(&condition.value),
         RuleOperator::Contains => current.is_some_and(|value| match value {
-            Value::String(text) => condition.value.as_str().is_some_and(|needle| text.contains(needle)),
+            Value::String(text) => condition
+                .value
+                .as_str()
+                .is_some_and(|needle| text.contains(needle)),
             Value::Array(values) => values.contains(&condition.value),
             _ => false,
         }),
-        RuleOperator::GreaterThan => compare_numbers(current, &condition.value) == Some(Ordering::Greater),
+        RuleOperator::GreaterThan => {
+            compare_numbers(current, &condition.value) == Some(Ordering::Greater)
+        }
         RuleOperator::GreaterOrEqual => matches!(
             compare_numbers(current, &condition.value),
             Some(Ordering::Greater | Ordering::Equal)
         ),
-        RuleOperator::LessThan => compare_numbers(current, &condition.value) == Some(Ordering::Less),
+        RuleOperator::LessThan => {
+            compare_numbers(current, &condition.value) == Some(Ordering::Less)
+        }
     }
 }
 
@@ -295,7 +303,10 @@ mod tests {
     use super::*;
 
     fn fixture() -> Vec<Evidence> {
-        serde_json::from_str(include_str!("../../../fixtures/fedora-general-evidence.json")).unwrap()
+        serde_json::from_str(include_str!(
+            "../../../fixtures/fedora-general-evidence.json"
+        ))
+        .unwrap()
     }
 
     #[test]
@@ -337,6 +348,9 @@ mod tests {
             operator: RuleOperator::GreaterThan,
             value: Value::from(0),
         };
-        assert!(!condition_matches(&Value::Object(Default::default()), &condition));
+        assert!(!condition_matches(
+            &Value::Object(Default::default()),
+            &condition
+        ));
     }
 }

@@ -10,7 +10,11 @@
   "collectorId": "fedora.network-state",
   "condition": { "path": "connected", "operator": "equals", "value": false },
   "likelyImpact": "Internet and local network services may be unavailable.",
-  "recommendedNextSteps": ["Check the network icon and reconnect the intended adapter.", "Verify the router or access point from another device."],
-  "documentationLinks": ["https://networkmanager.dev/docs/api/latest/nmcli.html"]
+  "recommendedNextSteps": [
+    "Check the network icon and reconnect the intended adapter.",
+    "Verify the router or access point from another device."
+  ],
+  "documentationLinks": [
+    "https://networkmanager.dev/docs/api/latest/nmcli.html"
+  ]
 }
-

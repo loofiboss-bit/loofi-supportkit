@@ -8,9 +8,17 @@
   "confidence": "confirmed_problem",
   "explanation": "The system disk has crossed the critical usage threshold.",
   "collectorId": "common.disk-usage",
-  "condition": { "path": "usedPercent", "operator": "greater_or_equal", "value": 90 },
+  "condition": {
+    "path": "usedPercent",
+    "operator": "greater_or_equal",
+    "value": 90
+  },
   "likelyImpact": "Updates, applications, and the desktop session may fail or become slow.",
-  "recommendedNextSteps": ["Review large personal files and application caches.", "Keep at least 15 percent free space before retrying updates."],
-  "documentationLinks": ["https://docs.fedoraproject.org/en-US/quick-docs/disk-usage/"]
+  "recommendedNextSteps": [
+    "Review large personal files and application caches.",
+    "Keep at least 15 percent free space before retrying updates."
+  ],
+  "documentationLinks": [
+    "https://docs.fedoraproject.org/en-US/quick-docs/disk-usage/"
+  ]
 }
-

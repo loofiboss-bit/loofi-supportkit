@@ -4,14 +4,38 @@
   "title": "Loofi SupportKit case",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schemaVersion", "caseId", "createdAt", "appVersion", "platform", "category", "scanStatus", "systemProfile", "collectionManifest", "findings", "evidence", "redactionManifest", "exportHistory"],
+  "required": [
+    "schemaVersion",
+    "caseId",
+    "createdAt",
+    "appVersion",
+    "platform",
+    "category",
+    "scanStatus",
+    "systemProfile",
+    "collectionManifest",
+    "findings",
+    "evidence",
+    "redactionManifest",
+    "exportHistory"
+  ],
   "properties": {
     "schemaVersion": { "const": "1.0.0" },
     "caseId": { "type": "string", "format": "uuid" },
     "createdAt": { "type": "string", "format": "date-time" },
     "appVersion": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+" },
     "platform": { "enum": ["windows_11_x64", "fedora_kde_44_x64"] },
-    "category": { "enum": ["performance", "network", "updates", "storage", "drivers_graphics", "services", "general"] },
+    "category": {
+      "enum": [
+        "performance",
+        "network",
+        "updates",
+        "storage",
+        "drivers_graphics",
+        "services",
+        "general"
+      ]
+    },
     "scanStatus": { "enum": ["complete", "partial", "cancelled"] },
     "systemProfile": {
       "type": "object",
@@ -33,7 +57,16 @@
         "required": ["collectorId", "status", "durationMs", "outputTruncated"],
         "properties": {
           "collectorId": { "type": "string" },
-          "status": { "enum": ["complete", "partial", "skipped", "failed", "timed_out", "cancelled"] },
+          "status": {
+            "enum": [
+              "complete",
+              "partial",
+              "skipped",
+              "failed",
+              "timed_out",
+              "cancelled"
+            ]
+          },
           "message": { "type": ["string", "null"] },
           "durationMs": { "type": "integer", "minimum": 0 },
           "outputTruncated": { "type": "boolean" }
@@ -41,15 +74,25 @@
       }
     },
     "findings": { "type": "array", "items": { "$ref": "finding.schema.json" } },
-    "evidence": { "type": "array", "items": { "$ref": "evidence.schema.json" } },
+    "evidence": {
+      "type": "array",
+      "items": { "$ref": "evidence.schema.json" }
+    },
     "redactionManifest": {
       "type": "object",
       "additionalProperties": false,
       "required": ["version", "categories", "transformedPaths", "warnings"],
       "properties": {
         "version": { "const": 1 },
-        "categories": { "type": "object", "additionalProperties": { "type": "integer", "minimum": 0 } },
-        "transformedPaths": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+        "categories": {
+          "type": "object",
+          "additionalProperties": { "type": "integer", "minimum": 0 }
+        },
+        "transformedPaths": {
+          "type": "array",
+          "items": { "type": "string" },
+          "uniqueItems": true
+        },
         "warnings": { "type": "array", "items": { "type": "string" } }
       }
     },
@@ -68,4 +111,3 @@
     }
   }
 }
-
