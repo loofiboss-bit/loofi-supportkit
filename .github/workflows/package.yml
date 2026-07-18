@@ -16,7 +16,7 @@ jobs:
     steps:
       - name: Install build tools
         run: dnf install -y git nodejs-npm rust cargo webkit2gtk4.1-devel openssl-devel curl wget file libappindicator-gtk3-devel librsvg2-devel libxdo-devel glib2-devel gcc gcc-c++ make rpm-build fuse-libs
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: npm ci
       - name: Build Fedora packages
         env:
@@ -34,7 +34,7 @@ jobs:
     name: Windows installer and portable executable
     runs-on: windows-2025
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v4
         with:
           node-version: 24
