@@ -4,5 +4,4 @@ Loofi SupportKit processes diagnostics locally. It has no telemetry, account, cl
 
 Before export, the privacy review lists changed data categories and field paths. The redaction manifest stores counts, never original matched values. Because no heuristic can recognize every sensitive value, users must review free-text evidence and the unclassified-data warning before sharing.
 
-Deleting a case removes its app-owned case file. Existing exports are separate files and are not deleted automatically.
-
+Removing a case from history moves its app-owned case file to the recovery directory. Existing exports are separate files and are not changed automatically.

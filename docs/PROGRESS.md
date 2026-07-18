@@ -2,7 +2,7 @@
 
 ## Current phase
 
-Phase 1 — foundations.
+First usable vertical slice — implemented and locally validated.
 
 ## Completed
 
@@ -10,11 +10,20 @@ Phase 1 — foundations.
 - Confirmed Tauri 2 command/capability and packaging conventions against current official documentation.
 - Recorded product scope, architecture decisions, threat model, and phased implementation plan.
 - Added the root workspace and command surface.
+- Added versioned evidence, finding, rule, and support-case schemas with synthetic fixtures.
+- Implemented deterministic rules, adversarial structured redaction, bounded collectors, static reports, checksummed ZIPs, and atomic redacted-case persistence.
+- Implemented the Tauri 2 + React diagnostic, findings, privacy, export, history, and settings workflow.
+- Added Linux/Windows CI, Dependabot, RPM/AppImage/NSIS packaging jobs, and user/developer/format/rule documentation.
 
 ## Validation performed
 
-- Local Node.js, npm, Rust, Cargo, Git, and just versions checked.
-- No pre-existing Git worktree or source changes were present.
+- `cargo test --workspace`: all unit and documentation tests passed.
+- `npm test`, schema validation, and production frontend build passed.
+- `just check`: formatting, Clippy, Rust/React tests, TypeScript, ESLint, schemas, and Prettier passed.
+- The ignored live Fedora collector smoke test passed without elevation.
+- Four Chromium/Playwright flows passed, including WCAG checks and 320/375/414/768 px overflow checks.
+- The Windows collector runtime passed cross-target Clippy with warnings denied.
+- Final Fedora RPM and AppImage packages built; the AppImage started successfully.
 
 ## Known limitations
 
@@ -28,5 +37,4 @@ Phase 1 — foundations.
 
 ## Next highest-priority task
 
-Implement versioned schemas and the deterministic Rust domain core with fixture tests.
-
+Validate Windows collectors on physical Windows 11 x64 hardware, add signing, and expose cooperative scan cancellation without weakening command bounds.

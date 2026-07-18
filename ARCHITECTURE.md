@@ -16,18 +16,18 @@ React workflow
 
 ## Repository map
 
-| Path | Responsibility |
-| --- | --- |
-| `apps/desktop` | React UI and Tauri command adapter |
-| `apps/desktop/src-tauri` | Scan orchestration, case persistence, narrow IPC |
-| `crates/supportkit-core` | Contracts, normalized evidence, rule evaluation |
-| `crates/collector-runtime` | Safe process runner and platform collectors |
-| `crates/redaction-engine` | Structured detection, transformation, manifest |
-| `crates/report-builder` | HTML/JSON/ZIP generation and checksums |
-| `collectors/*` | Reviewed collector metadata and platform notes |
-| `rules/*` | Declarative, schema-validated rule definitions |
-| `schemas` | Persisted/exported JSON contracts |
-| `fixtures` | Synthetic deterministic test data |
+| Path                       | Responsibility                                   |
+| -------------------------- | ------------------------------------------------ |
+| `apps/desktop`             | React UI and Tauri command adapter               |
+| `apps/desktop/src-tauri`   | Scan orchestration, case persistence, narrow IPC |
+| `crates/supportkit-core`   | Contracts, normalized evidence, rule evaluation  |
+| `crates/collector-runtime` | Safe process runner and platform collectors      |
+| `crates/redaction-engine`  | Structured detection, transformation, manifest   |
+| `crates/report-builder`    | HTML/JSON/ZIP generation and checksums           |
+| `collectors/*`             | Reviewed collector metadata and platform notes   |
+| `rules/*`                  | Declarative, schema-validated rule definitions   |
+| `schemas`                  | Persisted/exported JSON contracts                |
+| `fixtures`                 | Synthetic deterministic test data                |
 
 ## ADR-001: Rust owns the trusted path
 
@@ -65,4 +65,3 @@ When Tauri APIs are unavailable, the UI uses explicit synthetic fixture data. De
 ## Prior-art inspection
 
 The design reuses the boundary discipline, timeout conventions, deterministic tests, atomic-write patterns, narrow desktop bridge, calm navigation, and root-owned command surface observed in available `loofi-fedora-tweaks` and `swedish-secondhand-ai` checkouts. `hwmonitor-remote` and `loofi-control-center` were not present in the available workspace and could not be inspected. There is no runtime dependency on any sibling repository.
-

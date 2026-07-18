@@ -2,7 +2,7 @@
 
 Loofi SupportKit is a local-first desktop diagnostics application for Windows 11 x64 and Fedora KDE 44 x64. It collects bounded, read-only system evidence, evaluates deterministic rules, lets the user review privacy transformations, and exports a portable support case.
 
-The project is an early usable milestone. It does not repair systems, require an account, upload data, run a remote agent, or use AI in its trusted diagnostic core.
+The project contains a complete first usable vertical slice. It does not repair systems, require an account, upload data, run a remote agent, or use AI in its trusted diagnostic core.
 
 ## What works
 
@@ -45,8 +45,8 @@ Read [SECURITY.md](SECURITY.md), [PRIVACY.md](PRIVACY.md), and [docs/THREAT_MODE
 - [Rule authoring](docs/RULE_AUTHORING.md)
 - [User guide](docs/USER_GUIDE.md)
 - [Developer setup](docs/DEVELOPMENT.md)
+- [Packaging](packaging/README.md)
 
 ## License
 
 MIT. See [LICENSE](LICENSE).
-

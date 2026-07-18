@@ -19,4 +19,3 @@ Add GitHub Actions, Dependabot, packaging configuration/scaffolding, user/develo
 ## Milestone exit
 
 The milestone is usable when a Fedora KDE user can launch the Tauri app, run a supported scan without elevation, review deterministic findings and redacted evidence, export a valid bundle, and reopen the persisted case. Windows code must compile in CI and use the same contracts, but installer and live-collector validation remain target-platform gates.
-

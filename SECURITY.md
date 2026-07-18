@@ -13,4 +13,3 @@ Include the affected version, impact, reproduction using synthetic data, and sug
 ## Security boundary
 
 SupportKit is read-only, local-first, rootless, offline-capable, and contains no automatic upload or telemetry. See `docs/THREAT_MODEL.md` for controls and residual risks.
-

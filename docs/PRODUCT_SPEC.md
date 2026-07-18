@@ -38,4 +38,3 @@ Performance, network, operating-system updates, storage, drivers/graphics, faile
 ## Explicit non-goals
 
 No repairs, elevation, user-supplied commands, AI diagnosis, cloud service, account, telemetry, upload, remote access, unattended agent, sync, marketplace, plugins, mobile app, or community rule downloads.
-

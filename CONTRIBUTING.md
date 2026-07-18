@@ -8,4 +8,3 @@ just check
 ```
 
 Use English for code, comments, filenames, commits, and documentation. Never include real host diagnostics or secrets in issues, fixtures, snapshots, or logs. Report vulnerabilities through the process in `SECURITY.md` rather than a public issue.
-

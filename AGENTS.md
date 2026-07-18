@@ -27,4 +27,3 @@ Build a trustworthy, local-first, read-only diagnostics desktop application for 
 Run focused tests while changing code. Before handoff, run `just check`; for UI workflow changes also run `npm run test:e2e`; for packaging changes run `just package` on the target platform when dependencies are available.
 
 Keep fixtures synthetic. Never commit host evidence, usernames, tokens, machine IDs, serial numbers, or network identifiers.
-

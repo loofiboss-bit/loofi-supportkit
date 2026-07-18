@@ -1,0 +1,52 @@
+name: Package
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+
+jobs:
+  fedora:
+    name: Fedora RPM and AppImage
+    runs-on: ubuntu-24.04
+    container: fedora:44
+    steps:
+      - name: Install build tools
+        run: dnf install -y git nodejs-npm rust cargo webkit2gtk4.1-devel openssl-devel curl wget file libappindicator-gtk3-devel librsvg2-devel libxdo-devel glib2-devel gcc gcc-c++ make rpm-build fuse-libs
+      - uses: actions/checkout@v4
+      - run: npm ci
+      - name: Build Fedora packages
+        env:
+          NO_STRIP: "1"
+        run: npm run tauri --workspace @loofi/supportkit-desktop -- build --bundles rpm,appimage
+      - uses: actions/upload-artifact@v4
+        with:
+          name: loofi-supportkit-fedora-x64
+          path: |
+            target/release/bundle/rpm/*.rpm
+            target/release/bundle/appimage/*.AppImage
+          if-no-files-found: error
+
+  windows:
+    name: Windows installer and portable executable
+    runs-on: windows-2025
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - uses: dtolnay/rust-toolchain@stable
+      - run: npm ci
+      - name: Build NSIS installer
+        run: npm run tauri --workspace @loofi/supportkit-desktop -- build --bundles nsis
+      - uses: actions/upload-artifact@v4
+        with:
+          name: loofi-supportkit-windows-x64
+          path: |
+            target/release/bundle/nsis/*.exe
+            target/release/loofi-supportkit-desktop.exe
+          if-no-files-found: error

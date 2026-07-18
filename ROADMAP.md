@@ -15,4 +15,3 @@
 ## Future candidates, not commitments
 
 Additional explicitly tested OS versions and opt-in privileged collectors may be evaluated only after threat-model updates. AI diagnosis, repairs, remote access, cloud sync, accounts, unattended agents, and plugin marketplaces remain outside the planned trusted core.
-
