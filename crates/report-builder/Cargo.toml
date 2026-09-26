@@ -11,7 +11,7 @@ serde.workspace = true
 serde_json.workspace = true
 sha2.workspace = true
 supportkit-core = { path = "../supportkit-core" }
-zip = { version = "2.4", default-features = false, features = ["deflate"] }
+zip = { version = "8.6", default-features = false, features = ["deflate"] }
 
 [dev-dependencies]
 chrono.workspace = true
